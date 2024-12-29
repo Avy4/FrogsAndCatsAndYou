@@ -1,0 +1,132 @@
+[gd_scene load_steps=11 format=3 uid="uid://bxmugjkjki7nw"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/cat_lazer.gd" id="1_lve0o"]
+[ext_resource type="Texture2D" uid="uid://dlbt6y38awm8g" path="res://Assets/Other/Sprites/cat1.png" id="1_rar8s"]
+[ext_resource type="Texture2D" uid="uid://cgdngvi3ltoid" path="res://Assets/Other/Sprites/cat2.png" id="2_50y0i"]
+[ext_resource type="Texture2D" uid="uid://dtsvjioudmkdm" path="res://Assets/Other/Sprites/cat3.png" id="3_4ikvl"]
+[ext_resource type="Texture2D" uid="uid://dorxdfdkjkk7d" path="res://Assets/Other/Sprites/cat_2.png" id="4_0pg68"]
+[ext_resource type="Texture2D" uid="uid://bkr0evq4qyllm" path="res://Assets/Other/Sprites/cat_3.png" id="5_bj7b5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hlphy"]
+height = 320.0
+
+[sub_resource type="Animation" id="Animation_tyak5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_rar8s")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:shape:height")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [320.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_8xrhk"]
+resource_name = "lazer_beam"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.43333, 1.5, 1.73333, 2, 2.23333, 2.5, 2.73333, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_rar8s"), ExtResource("2_50y0i"), ExtResource("3_4ikvl"), null, ExtResource("4_0pg68"), ExtResource("5_bj7b5"), ExtResource("4_0pg68"), ExtResource("5_bj7b5"), ExtResource("4_0pg68"), ExtResource("5_bj7b5"), ExtResource("4_0pg68")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:shape:height")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [30.0, 320.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, 6), Vector2(0, 2)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.46667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"changeMove"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f0ge5"]
+_data = {
+"RESET": SubResource("Animation_tyak5"),
+"lazer_beam": SubResource("Animation_8xrhk")
+}
+
+[node name="CatLazer" type="Node2D"]
+z_index = -2
+script = ExtResource("1_lve0o")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("1_rar8s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_hlphy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
+libraries = {
+"": SubResource("AnimationLibrary_f0ge5")
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="animation_finished" from="Area2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

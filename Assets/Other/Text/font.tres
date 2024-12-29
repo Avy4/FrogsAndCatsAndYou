@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://e3f6udppv5pb"]
+
+[ext_resource type="FontFile" uid="uid://bobvc0hw2kq0v" path="res://Assets/Other/Text/PixeloidSans-mLxMm.ttf" id="1_soslj"]
+
+[resource]
+font = ExtResource("1_soslj")
+font_size = 4

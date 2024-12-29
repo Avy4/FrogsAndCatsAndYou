@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://4lfo5a6j36j3"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/coin_patterns.gd" id="1_4tvbv"]
+[ext_resource type="PackedScene" uid="uid://bawd7m8ure722" path="res://Assets/Scenes/frog_coin.tscn" id="1_stqri"]
+
+[node name="CoinStream2" type="Node2D"]
+position = Vector2(320, 0)
+script = ExtResource("1_4tvbv")
+
+[node name="frog_coin" parent="." instance=ExtResource("1_stqri")]
+position = Vector2(3.38813e-21, 4.76837e-06)
+
+[node name="frog_coin2" parent="." instance=ExtResource("1_stqri")]
+position = Vector2(8, 0)
+
+[node name="frog_coin3" parent="." instance=ExtResource("1_stqri")]
+position = Vector2(16, -4.76837e-07)
+
+[node name="frog_coin4" parent="." instance=ExtResource("1_stqri")]
+position = Vector2(24, -4.76837e-07)
+
+[node name="frog_coin5" parent="." instance=ExtResource("1_stqri")]
+position = Vector2(32, 0)
+
+[node name="frog_coin6" parent="." instance=ExtResource("1_stqri")]
+position = Vector2(40, 0)
+
+[node name="frog_coin7" parent="." instance=ExtResource("1_stqri")]
+position = Vector2(48, 4.76837e-06)
+
+[node name="frog_coin8" parent="." instance=ExtResource("1_stqri")]
+position = Vector2(16, 8)
+
+[node name="frog_coin9" parent="." instance=ExtResource("1_stqri")]
+position = Vector2(24, 8)
+
+[node name="frog_coin10" parent="." instance=ExtResource("1_stqri")]
+position = Vector2(32, 8)
+
+[node name="frog_coin11" parent="." instance=ExtResource("1_stqri")]
+position = Vector2(40, 8)
+
+[node name="frog_coin12" parent="." instance=ExtResource("1_stqri")]
+position = Vector2(48, 8)
+
+[node name="frog_coin13" parent="." instance=ExtResource("1_stqri")]
+position = Vector2(56, 8)
+
+[node name="frog_coin14" parent="." instance=ExtResource("1_stqri")]
+position = Vector2(64, 8)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(32, 4)
+scale = Vector2(3.2, 0.4)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

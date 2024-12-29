@@ -1,0 +1,122 @@
+[gd_scene load_steps=14 format=3 uid="uid://da8svv8wkma8a"]
+
+[ext_resource type="Texture2D" uid="uid://dfilxast3imt1" path="res://Assets/Other/Sprites/robot_spritesheet.png" id="1_ig08t"]
+[ext_resource type="Script" path="res://Assets/Scripts/main_character.gd" id="1_kvmy6"]
+
+[sub_resource type="Gradient" id="Gradient_fbafe"]
+offsets = PackedFloat32Array(0.00696864, 0.247387, 0.439024, 0.56446, 0.703833, 0.825784, 1)
+colors = PackedColorArray(0.205251, 0.0968297, 0.437926, 1, 0.101961, 0.176471, 0.701961, 1, 0.113218, 0.196498, 0.717896, 1, 0.268718, 0.473146, 0.938023, 1, 0.258824, 0.611765, 0.952941, 1, 0.458824, 0.882353, 0.968627, 1, 1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhdxt"]
+atlas = ExtResource("1_ig08t")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jrc6"]
+atlas = ExtResource("1_ig08t")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7phr"]
+atlas = ExtResource("1_ig08t")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y236w"]
+atlas = ExtResource("1_ig08t")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uyhu"]
+atlas = ExtResource("1_ig08t")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtr8l"]
+atlas = ExtResource("1_ig08t")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ce2em"]
+atlas = ExtResource("1_ig08t")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g57ui"]
+atlas = ExtResource("1_ig08t")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qeox4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhdxt")
+}],
+"loop": true,
+"name": &"falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jrc6")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7phr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y236w")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2uyhu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtr8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ce2em")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g57ui")
+}],
+"loop": true,
+"name": &"running",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o3q70"]
+radius = 2.66667
+height = 14.6667
+
+[node name="MainCharacter" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_kvmy6")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-4.66667, 5.33333)
+amount = 95
+lifetime = 0.1
+draw_order = 1
+emission_shape = 1
+emission_sphere_radius = 0.9
+spread = 180.0
+gravity = Vector2(-670, 980)
+initial_velocity_max = 23.95
+color_ramp = SubResource("Gradient_fbafe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_qeox4")
+animation = &"running"
+frame_progress = 0.127979
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.666667, 1.33333)
+shape = SubResource("CapsuleShape2D_o3q70")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(100, 0)
+limit_top = 0
+limit_bottom = 226

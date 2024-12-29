@@ -1,0 +1,156 @@
+[gd_scene load_steps=12 format=3 uid="uid://dixi8yt8wq1f4"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/start_screen.gd" id="1_hx7sn"]
+[ext_resource type="FontFile" uid="uid://bobvc0hw2kq0v" path="res://Assets/Other/Text/PixeloidSans-mLxMm.ttf" id="1_rvupn"]
+[ext_resource type="Texture2D" uid="uid://dj8w4bw8q6wc1" path="res://Assets/Other/Sprites/preview.png" id="2_6hx8u"]
+[ext_resource type="Texture2D" uid="uid://x3e4fsfb0mnl" path="res://Assets/Other/Sprites/cat_black-32x48.png" id="3_bxrfy"]
+
+[sub_resource type="Animation" id="Animation_6rn0e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(296, 192)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_2wub7"]
+resource_name = "cat_move"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(296, 192), Vector2(24, 192), Vector2(296, 192)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ulsj"]
+_data = {
+"RESET": SubResource("Animation_6rn0e"),
+"cat_move": SubResource("Animation_2wub7")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcwmg"]
+atlas = ExtResource("3_bxrfy")
+region = Rect2(0, 144, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2i60d"]
+atlas = ExtResource("3_bxrfy")
+region = Rect2(32, 144, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7muw"]
+atlas = ExtResource("3_bxrfy")
+region = Rect2(64, 144, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sqi4j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcwmg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2i60d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7muw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="StartScreen" type="Node"]
+script = ExtResource("1_hx7sn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="RichTextLabel" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -156.0
+offset_right = 156.0
+offset_bottom = 83.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("1_rvupn")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center][color=89FF66]Frogs [/color]and [color=FFA3DD]Cats[/color] and You"
+scroll_active = false
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.275
+anchor_top = 0.506637
+anchor_right = 0.725
+anchor_bottom = 0.674779
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_rvupn")
+theme_override_font_sizes/font_size = 24
+text = "Start!"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6hx8u")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2ulsj")
+}
+autoplay = "cat_move"
+speed_scale = 0.3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(296, 192)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_sqi4j")
+autoplay = "default"
+frame_progress = 0.423846
+flip_h = true
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

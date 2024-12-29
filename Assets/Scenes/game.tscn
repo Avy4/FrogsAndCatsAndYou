@@ -1,0 +1,130 @@
+[gd_scene load_steps=17 format=3 uid="uid://diwkyx25xb4e"]
+
+[ext_resource type="PackedScene" uid="uid://diwy1v4momu3a" path="res://Assets/Scenes/parallax.tscn" id="1_7srn4"]
+[ext_resource type="Script" path="res://Assets/Scripts/game.gd" id="1_nrgnr"]
+[ext_resource type="Script" path="res://Assets/Scripts/obstacle_spawner.gd" id="2_bij6c"]
+[ext_resource type="Texture2D" uid="uid://btfe14aqtgtcw" path="res://Assets/Other/Sprites/hit_space.png" id="2_bjtop"]
+[ext_resource type="PackedScene" uid="uid://da8svv8wkma8a" path="res://Assets/Scenes/main_character.tscn" id="2_rotgn"]
+[ext_resource type="PackedScene" uid="uid://vrl4e8xsny31" path="res://Assets/Scenes/CoinPatterns/triangle.tscn" id="3_v0vx7"]
+[ext_resource type="LabelSettings" uid="uid://e3f6udppv5pb" path="res://Assets/Other/Text/font.tres" id="4_pdqnr"]
+[ext_resource type="PackedScene" uid="uid://ce0olawr2pfv2" path="res://Assets/Scenes/CoinPatterns/rectangle.tscn" id="5_se44h"]
+[ext_resource type="PackedScene" uid="uid://b830vm5tjmmyg" path="res://Assets/Scenes/CoinPatterns/polynomial.tscn" id="5_v4tff"]
+[ext_resource type="PackedScene" uid="uid://crhu8xot881ah" path="res://Assets/Scenes/CoinPatterns/dollar_sign.tscn" id="6_05xwu"]
+[ext_resource type="PackedScene" uid="uid://dk4ccvlftvea" path="res://Assets/Scenes/CoinPatterns/coin_stream.tscn" id="7_74th5"]
+[ext_resource type="PackedScene" uid="uid://4lfo5a6j36j3" path="res://Assets/Scenes/CoinPatterns/coin_stream2.tscn" id="8_wqjf1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ao2q"]
+atlas = ExtResource("2_bjtop")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fx6d6"]
+atlas = ExtResource("2_bjtop")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2r4iq"]
+atlas = ExtResource("2_bjtop")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ujiye"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_1ao2q")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_fx6d6")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_2r4iq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_nrgnr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(208, 120)
+sprite_frames = SubResource("SpriteFrames_ujiye")
+autoplay = "default"
+frame_progress = 0.224808
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+offset_right = 39.0
+offset_bottom = 10.0
+theme_override_constants/separation = -1
+
+[node name="CurrentScore" type="Label" parent="UI/VBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "0 px"
+label_settings = ExtResource("4_pdqnr")
+
+[node name="HighScore" type="Label" parent="UI/VBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+text = "top px: "
+label_settings = ExtResource("4_pdqnr")
+
+[node name="CurrentSpeed" type="Label" parent="UI/VBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+text = "px/(?): "
+label_settings = ExtResource("4_pdqnr")
+
+[node name="MainCharacter" parent="." instance=ExtResource("2_rotgn")]
+position = Vector2(53, 210)
+
+[node name="ObstacleSpawner" type="Node2D" parent="."]
+position = Vector2(53.8123, 210.873)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("2_bij6c")
+coin_patterns = Array[PackedScene]([ExtResource("3_v0vx7"), ExtResource("5_se44h"), ExtResource("5_v4tff"), ExtResource("6_05xwu"), ExtResource("7_74th5"), ExtResource("8_wqjf1")])
+
+[node name="Timers" type="Node" parent="ObstacleSpawner"]
+
+[node name="Rockets" type="Timer" parent="ObstacleSpawner/Timers"]
+wait_time = 4.0
+autostart = true
+
+[node name="HorizontalLaser" type="Timer" parent="ObstacleSpawner/Timers"]
+wait_time = 7.0
+autostart = true
+
+[node name="Coins" type="Timer" parent="ObstacleSpawner/Timers"]
+wait_time = 11.0
+autostart = true
+
+[node name="FrogLaser" type="Timer" parent="ObstacleSpawner/Timers"]
+wait_time = 3.5
+autostart = true
+
+[node name="Holders" type="Node" parent="ObstacleSpawner"]
+
+[node name="FrogLasersHolder" type="Node" parent="ObstacleSpawner/Holders"]
+unique_name_in_owner = true
+
+[node name="CoinsHolder" type="Node" parent="ObstacleSpawner/Holders"]
+unique_name_in_owner = true
+
+[node name="HorizontalLaserHolder" type="Node" parent="ObstacleSpawner/Holders"]
+unique_name_in_owner = true
+
+[node name="RocketsHolder" type="Node" parent="ObstacleSpawner/Holders"]
+unique_name_in_owner = true
+
+[node name="Parallax" parent="." instance=ExtResource("1_7srn4")]
+
+[connection signal="timeout" from="ObstacleSpawner/Timers/Rockets" to="ObstacleSpawner" method="_on_rockets_timeout"]
+[connection signal="timeout" from="ObstacleSpawner/Timers/HorizontalLaser" to="ObstacleSpawner" method="_on_horizontal_laser_timeout"]
+[connection signal="timeout" from="ObstacleSpawner/Timers/Coins" to="ObstacleSpawner" method="_on_coins_timeout"]
+[connection signal="timeout" from="ObstacleSpawner/Timers/FrogLaser" to="ObstacleSpawner" method="_on_frog_laser_timeout"]

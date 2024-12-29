@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://vrl4e8xsny31"]
+
+[ext_resource type="PackedScene" uid="uid://bawd7m8ure722" path="res://Assets/Scenes/frog_coin.tscn" id="1_bit0j"]
+[ext_resource type="Script" path="res://Assets/Scripts/coin_patterns.gd" id="1_np1po"]
+
+[node name="Triangle" type="Node2D"]
+position = Vector2(320, 0)
+script = ExtResource("1_np1po")
+
+[node name="frog_coin" parent="." instance=ExtResource("1_bit0j")]
+
+[node name="frog_coin2" parent="." instance=ExtResource("1_bit0j")]
+position = Vector2(8, 0)
+
+[node name="frog_coin3" parent="." instance=ExtResource("1_bit0j")]
+position = Vector2(-8, 0)
+
+[node name="frog_coin4" parent="." instance=ExtResource("1_bit0j")]
+position = Vector2(0, -8)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(1, 0.9)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

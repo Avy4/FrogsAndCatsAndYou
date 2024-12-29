@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://b830vm5tjmmyg"]
+
+[ext_resource type="PackedScene" uid="uid://bawd7m8ure722" path="res://Assets/Scenes/frog_coin.tscn" id="1_lb3qv"]
+[ext_resource type="Script" path="res://Assets/Scripts/coin_patterns.gd" id="1_umopj"]
+
+[node name="Polygon" type="Node2D"]
+position = Vector2(320, 0)
+script = ExtResource("1_umopj")
+
+[node name="frog_coin2" parent="." instance=ExtResource("1_lb3qv")]
+position = Vector2(-8, -8)
+
+[node name="frog_coin3" parent="." instance=ExtResource("1_lb3qv")]
+position = Vector2(9.53674e-07, -8)
+
+[node name="frog_coin4" parent="." instance=ExtResource("1_lb3qv")]
+position = Vector2(8, -8)
+
+[node name="frog_coin6" parent="." instance=ExtResource("1_lb3qv")]
+position = Vector2(16, 0)
+
+[node name="frog_coin7" parent="." instance=ExtResource("1_lb3qv")]
+position = Vector2(8, 0)
+
+[node name="frog_coin8" parent="." instance=ExtResource("1_lb3qv")]
+position = Vector2(9.53674e-07, 0)
+
+[node name="frog_coin9" parent="." instance=ExtResource("1_lb3qv")]
+position = Vector2(-8, 0)
+
+[node name="frog_coin10" parent="." instance=ExtResource("1_lb3qv")]
+position = Vector2(-16, -4.76837e-07)
+
+[node name="frog_coin13" parent="." instance=ExtResource("1_lb3qv")]
+position = Vector2(-8, 8)
+
+[node name="frog_coin14" parent="." instance=ExtResource("1_lb3qv")]
+position = Vector2(0, 8)
+
+[node name="frog_coin15" parent="." instance=ExtResource("1_lb3qv")]
+position = Vector2(8, 8)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-1.43051e-06, -1)
+scale = Vector2(1.6, 0.9)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

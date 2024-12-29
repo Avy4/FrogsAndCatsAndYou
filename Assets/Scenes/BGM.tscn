@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://w58ys3jnm2d3"]
+
+[ext_resource type="AudioStream" uid="uid://c48cs4oy324t8" path="res://Assets/Other/Music/Viktor Kraus - Blueberries.mp3" id="1_4ssfp"]
+
+[node name="BGM" type="Node"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_4ssfp")
+autoplay = true
+bus = &"BGM"
+parameters/looping = false

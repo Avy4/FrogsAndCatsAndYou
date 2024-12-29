@@ -1,0 +1,140 @@
+[gd_scene load_steps=17 format=3 uid="uid://dqnu1r1lgfe4p"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/frog_laser.gd" id="1_4in1k"]
+[ext_resource type="Texture2D" uid="uid://cbwv5t8igcsnu" path="res://Assets/Other/Sprites/frog_laser.png" id="1_jwtlq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mb0bo"]
+atlas = ExtResource("1_jwtlq")
+region = Rect2(0, 0, 20, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlqmm"]
+atlas = ExtResource("1_jwtlq")
+region = Rect2(20, 0, 20, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abks4"]
+atlas = ExtResource("1_jwtlq")
+region = Rect2(40, 0, 20, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh7in"]
+atlas = ExtResource("1_jwtlq")
+region = Rect2(240, 0, 20, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pbfl"]
+atlas = ExtResource("1_jwtlq")
+region = Rect2(220, 0, 20, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mxgd"]
+atlas = ExtResource("1_jwtlq")
+region = Rect2(200, 0, 20, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwwkp"]
+atlas = ExtResource("1_jwtlq")
+region = Rect2(300, 0, 20, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24xae"]
+atlas = ExtResource("1_jwtlq")
+region = Rect2(280, 0, 20, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bcp0"]
+atlas = ExtResource("1_jwtlq")
+region = Rect2(260, 0, 20, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5xp8"]
+atlas = ExtResource("1_jwtlq")
+region = Rect2(60, 0, 20, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhhot"]
+atlas = ExtResource("1_jwtlq")
+region = Rect2(80, 0, 20, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kw1m3"]
+atlas = ExtResource("1_jwtlq")
+region = Rect2(100, 0, 20, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ue3eq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mb0bo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlqmm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abks4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh7in")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pbfl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mxgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwwkp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24xae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bcp0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5xp8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhhot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kw1m3")
+}],
+"loop": true,
+"name": &"pulsating",
+"speed": 11.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lm23p"]
+radius = 7.33333
+height = 48.0
+
+[node name="FrogLaser" type="Node2D"]
+z_index = -1
+position = Vector2(310, 0)
+script = ExtResource("1_4in1k")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-1.04907e-06, 6)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+sprite_frames = SubResource("SpriteFrames_ue3eq")
+animation = &"pulsating"
+autoplay = "pulsating"
+frame_progress = 0.945592
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Area2D/AnimatedSprite2D"]
+position = Vector2(0, -7)
+scale = Vector2(0.0754717, 0.0817369)
+amount = 15
+lifetime = 0.09
+speed_scale = 0.25
+emission_shape = 3
+emission_rect_extents = Vector2(50, 150)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+scale_amount_min = 1.5
+scale_amount_max = 1.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -6)
+shape = SubResource("CapsuleShape2D_lm23p")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -6.55651e-07)
+scale = Vector2(0.733333, 2.53333)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

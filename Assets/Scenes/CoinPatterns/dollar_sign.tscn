@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://crhu8xot881ah"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/coin_patterns.gd" id="1_f16ot"]
+[ext_resource type="PackedScene" uid="uid://bawd7m8ure722" path="res://Assets/Scenes/frog_coin.tscn" id="1_kuhwx"]
+
+[node name="DollarSign" type="Node2D"]
+position = Vector2(320, 0)
+script = ExtResource("1_f16ot")
+
+[node name="frog_coin" parent="." instance=ExtResource("1_kuhwx")]
+position = Vector2(1.90735e-06, -16)
+
+[node name="frog_coin2" parent="." instance=ExtResource("1_kuhwx")]
+position = Vector2(8, -16)
+
+[node name="frog_coin4" parent="." instance=ExtResource("1_kuhwx")]
+position = Vector2(-8, -8)
+
+[node name="frog_coin6" parent="." instance=ExtResource("1_kuhwx")]
+position = Vector2(1.90735e-06, 0)
+
+[node name="frog_coin8" parent="." instance=ExtResource("1_kuhwx")]
+position = Vector2(8, 8)
+
+[node name="frog_coin10" parent="." instance=ExtResource("1_kuhwx")]
+position = Vector2(1.90735e-06, 16)
+
+[node name="frog_coin11" parent="." instance=ExtResource("1_kuhwx")]
+position = Vector2(-8, 16)
+
+[node name="frog_coin12" parent="." instance=ExtResource("1_kuhwx")]
+position = Vector2(1.90735e-06, 24)
+
+[node name="frog_coin13" parent="." instance=ExtResource("1_kuhwx")]
+position = Vector2(1.90735e-06, -24)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0.999995, 2.38419e-07)
+scale = Vector2(0.9, 2.4)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

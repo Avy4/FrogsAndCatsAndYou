@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce0olawr2pfv2"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/coin_patterns.gd" id="1_2kn6w"]
+[ext_resource type="PackedScene" uid="uid://bawd7m8ure722" path="res://Assets/Scenes/frog_coin.tscn" id="1_4wutf"]
+
+[node name="Rectangle" type="Node2D"]
+position = Vector2(320, 0)
+script = ExtResource("1_2kn6w")
+
+[node name="frog_coin" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(1.90735e-06, -1.77636e-15)
+
+[node name="frog_coin2" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(8, 8)
+
+[node name="frog_coin3" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(16, 0)
+
+[node name="frog_coin4" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(24, 8)
+
+[node name="frog_coin5" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(32, 0)
+
+[node name="frog_coin6" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(40, 8)
+
+[node name="frog_coin7" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(3.8147e-06, 16)
+
+[node name="frog_coin8" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(32, 16)
+
+[node name="frog_coin10" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(40, 24)
+
+[node name="frog_coin11" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(24, 24)
+
+[node name="frog_coin12" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(8, 24)
+
+[node name="frog_coin9" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(16, 16)
+
+[node name="frog_coin13" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(48, 0)
+
+[node name="frog_coin14" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(48, 16)
+
+[node name="frog_coin15" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(48, 32)
+
+[node name="frog_coin16" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(32, 32)
+
+[node name="frog_coin17" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(16, 32)
+
+[node name="frog_coin18" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(9.53674e-07, 32)
+
+[node name="frog_coin19" parent="." instance=ExtResource("1_4wutf")]
+position = Vector2(9.53674e-07, 32)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(24, 16)
+scale = Vector2(2.4, 1.6)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
